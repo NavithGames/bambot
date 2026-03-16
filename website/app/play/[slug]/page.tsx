@@ -1,9 +1,13 @@
 "use client";
 import { useParams } from "next/navigation";
 import { notFound } from "next/navigation";
-
-import RobotLoader from "@/components/playground/RobotLoader";
+import dynamic from "next/dynamic";
 import { robotConfigMap } from "@/config/robotConfig";
+
+const RobotLoader = dynamic(
+  () => import("@/components/playground/RobotLoader"),
+  { ssr: false, loading: () => <div className="flex items-center justify-center w-screen h-screen text-white text-2xl">Loading...</div> }
+);
 
 export default function Page() {
   const params = useParams();
